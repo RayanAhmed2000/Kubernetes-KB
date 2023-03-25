@@ -1,2 +1,3 @@
 # Kubernetes-KB
-Kubernetes concepts and Commands
+- Kubernetes concepts
+- Commands
