@@ -1,0 +1,27 @@
+kubectl run <podname> --image=nginx           # create pod
+
+kubectl delete pod <podname>                  # delete pod
+
+kubectl exec -it <podname> /bin/bash          # to enter pod
+
+kubectl run <podname> --image=nginx yaml      # mujhe output dikhao yaml me 
+
+kubectl run sample --image=nginx --dry-run=client     # matlab banao mat sirf simulate karo
+
+kubectl create -f <filename>.yml             # create yaml file
+
+kubectl apply -f <filename>.yml             # create POD/rc/deploy with yml file
+
+kubectl logs <podname>                       # show logs
+
+
+CREATE DEPLOYMENT
+
+kubectl create -f <filename>.yml             # create yaml file then execute 
+
+kubectl create deploy rayan --image=nginx    # create a deployment with command
+
+kubectl scale --replica=4 deploy mysql      # command se replica ka size badana in deployment
+
+
+
