@@ -8,7 +8,7 @@ kubectl run <podname> --image=nginx yaml      # mujhe output dikhao yaml me
 
 kubectl run sample --image=nginx --dry-run=client -o yaml > hello.yml -n rayan   # matlab banao mat sirf simulate karo
 
-kubectl create -f <filename>.yml             # create yaml file
+kubectl create -f <filename>.yml             # create a pod/deploy/rc using yml file
 
 kubectl apply -f <filename>.yml             # create POD/rc/deploy with yml file
 
@@ -17,7 +17,7 @@ kubectl logs <podname>                       # show logs
 
 CREATE DEPLOYMENT
 
-kubectl create -f <filename>.yml             # create yaml file then execute 
+kubectl create -f <filename>.yml             # create a deployment with yaml file 
 
 kubectl create deploy rayan --image=nginx    # create a deployment with command
 
