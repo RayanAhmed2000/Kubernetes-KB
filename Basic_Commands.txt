@@ -31,3 +31,4 @@ kubectl get service                         # see kube-proxy
 
 kubectl delete service <deployment-name>    # delete kube-proxy
 
+kubectl rollout history <deployement-name>  # get rollout history
