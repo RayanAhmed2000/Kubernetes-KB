@@ -16,6 +16,13 @@ kubectl apply -f <filename>.yml             # create POD/rc/deploy with yml file
 
 kubectl logs <podname>                       # show logs
 
+kubectl logs podname -n namespace           # shows you the logs of the pod in the specified namespace
+
+kubectl logs <podname> -n namespace -c <containername>   # shows logs of  a specific conatiner
+
+kubectl logs <podname> -n namespace -all-conatiners=true  #show logs of all conatiners in a namespace
+
+
 
 CREATE DEPLOYMENT
 
