@@ -1,12 +1,12 @@
-kubectl run <podname> --image=nginx           # create pod
+kubectl run <podname> --image=nginx           # create pod 
+
+kubectl run <podname> --image=nginx --dry-run=client -o yaml  # mujhe output dikhao yaml me
+
+kubectl run sample --image=nginx --dry-run=client -o yaml > hello.yml -n rayan   # matlab banao mat sirf simulate karo
 
 kubectl delete pod <podname>                  # delete pod
 
 kubectl exec -it <podname> /bin/bash          # to enter pod
-
-kubectl run <podname> --image=nginx yaml      # mujhe output dikhao yaml me 
-
-kubectl run sample --image=nginx --dry-run=client -o yaml > hello.yml -n rayan   # matlab banao mat sirf simulate karo
 
 kubectl create -f <filename>.yml             # create a pod/deploy/rc using yml file
 
@@ -21,6 +21,10 @@ kubectl logs podname -n namespace           # shows you the logs of the pod in t
 kubectl logs <podname> -n namespace -c <containername>   # shows logs of  a specific conatiner
 
 kubectl logs <podname> -n namespace -all-conatiners=true  #show logs of all conatiners in a namespace
+
+kubectl cordon <node name>                # disable scheduling on a node
+
+kubectl uncordon <nodename>               # enable scheduling on a node
 
 
 
