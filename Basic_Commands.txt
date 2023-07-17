@@ -6,6 +6,12 @@ kubectl run sample --image=nginx --dry-run=client -o yaml > hello.yml -n rayan  
 
 kubectl delete pod <podname>                  # delete pod
 
+kubectl delete pod --all                      # delete all pods in default namspace 
+
+kubectl delete pod -n <namespacename> --all  # delete all pods in sample namespace
+
+Kubectl describe pod <podname>                 # describe pod
+
 kubectl exec -it <podname> /bin/bash          # to enter pod
 
 kubectl create -f <filename>.yml             # create a pod/deploy/rc using yml file
@@ -13,6 +19,14 @@ kubectl create -f <filename>.yml             # create a pod/deploy/rc using yml 
 kubectl create ns <namespacename>           # create a namespaces
 
 kubectl apply -f <filename>.yml             # create POD/rc/deploy with yml file
+
+kubectl get pods                            # show pods 
+
+kubectl get pods -o wide --show-lables      # show pods with labels
+
+kubeclt get pods -l app=nginx              # show pods with speccific labels
+
+Kubectl get events                          # show all logs 
 
 kubectl logs <podname>                       # show logs
 
@@ -26,11 +40,20 @@ kubectl cordon <node name>                # disable scheduling on a node
 
 kubectl uncordon <nodename>               # enable scheduling on a node
 
+kubectl get componentstatus                # shows status of components
 
 
 CREATE DEPLOYMENT
 
-kubectl create -f <filename>.yml             # create a deployment with yaml file 
+kubectl create -f <filename>.yml             # create a deployment/rc with yaml file
+
+kubectl create deploy <deploymentname> --image=nginx  # create a deployment from command line
+
+kubectl apply -f <filename>.yml              # if you make changes to manifest then you have to use this command 
+
+kubectl edit rc <filename>.yml               # if you cant find the rc.yml file you can extract it from etcd and edit
+
+kubectl describe pod <podname> | grep -i controller   #if you want to see if a pod is a part of rc/rs/dc
 
 kubectl create deploy rayan --image=nginx    # create a deployment with command
 
@@ -42,4 +65,27 @@ kubectl get service                         # see kube-proxy
 
 kubectl delete service <deployment-name>    # delete kube-proxy
 
+kubectl describe deploy <deploymentname>    # describe deployment
+
+kubectl create deploy <deploymentname> --image=nginx  # create a deployment
+
+
+
+ROLLOUT AND ROLLBACK
+
 kubectl rollout history <deployement-name>  # get rollout history
+
+kubectl rollout undo deploy <deployment name> --to-revision=1     # rollback
+
+kubectl set image deploy <deploymentname> nginx=nginx:1.16     # rollout with command
+
+kubectl set image deploy <deploymentname> nginx=nginx:1.16 --record=true  # rollout with command and save in history
+
+
+
+
+
+
+
+
+
