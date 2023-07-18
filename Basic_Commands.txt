@@ -42,6 +42,8 @@ kubectl uncordon <nodename>               # enable scheduling on a node
 
 kubectl get componentstatus                # shows status of components
 
+kubectl get pods --show-labels
+
 
 CREATE DEPLOYMENT
 
@@ -80,6 +82,30 @@ kubectl rollout undo deploy <deployment name> --to-revision=1     # rollback
 kubectl set image deploy <deploymentname> nginx=nginx:1.16     # rollout with command
 
 kubectl set image deploy <deploymentname> nginx=nginx:1.16 --record=true  # rollout with command and save in history
+
+
+LABELS AND SELECTORS | TAINTS AND TOLERANTS
+
+kubectl label node <nodename> compute=monitoring       # assign label to a node
+
+kubectl deescribe nodes node1 | grep -i taints          # how to know if a particular node is tainted or not
+
+kubectl taint node node1 application:NoSchedule        # How to taint nodes
+
+kubectl describe nodes <nodename> | grep -iA5 allocated  # see how much resource quota is allocated
+
+kubectl create quota demo --hard=pods=10 #sirf 10 pods ban payen default namespace me
+
+
+
+KUBERNETES NETWORKING
+
+kubectl expose deploy mysql --port=80            # create proxy IP
+
+kubectl describe ing <nodename>                  # view ingress
+
+
+
 
 
 
