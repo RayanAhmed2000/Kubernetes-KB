@@ -36,13 +36,7 @@ kubectl logs <podname> -n namespace -c <containername>   # shows logs of  a spec
 
 kubectl logs <podname> -n namespace -all-conatiners=true  #show logs of all conatiners in a namespace
 
-kubectl cordon <node name>                # disable scheduling on a node
-
-kubectl uncordon <nodename>               # enable scheduling on a node
-
 kubectl get componentstatus                # shows status of components
-
-kubectl get pods --show-labels
 
 
 CREATE DEPLOYMENT
@@ -57,8 +51,6 @@ kubectl edit rc <filename>.yml               # if you cant find the rc.yml file 
 
 kubectl describe pod <podname> | grep -i controller   #if you want to see if a pod is a part of rc/rs/dc
 
-kubectl create deploy rayan --image=nginx    # create a deployment with command
-
 kubectl scale --replica=4 deploy mysql      # command se replica ka size badana in deployment
 
 kubectl expose deploy <deployemnt-name> --port=80   # create kube-proxy
@@ -69,7 +61,6 @@ kubectl delete service <deployment-name>    # delete kube-proxy
 
 kubectl describe deploy <deploymentname>    # describe deployment
 
-kubectl create deploy <deploymentname> --image=nginx  # create a deployment
 
 
 
@@ -84,7 +75,12 @@ kubectl set image deploy <deploymentname> nginx=nginx:1.16     # rollout with co
 kubectl set image deploy <deploymentname> nginx=nginx:1.16 --record=true  # rollout with command and save in history
 
 
+PODS SCHEDULING
 LABELS AND SELECTORS | TAINTS AND TOLERANTS
+
+kubectl cordon <node name>                # disable scheduling on a node
+
+kubectl uncordon <nodename>               # enable scheduling on a node
 
 kubectl label node <nodename> compute=monitoring       # assign label to a node
 
