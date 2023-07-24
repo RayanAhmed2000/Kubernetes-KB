@@ -38,6 +38,8 @@ kubectl logs <podname> -n namespace -all-conatiners=true  #show logs of all cona
 
 kubectl get componentstatus                # shows status of components
 
+kubectl top pod                            # show resource utilization of pods
+
 
 CREATE DEPLOYMENT
 
