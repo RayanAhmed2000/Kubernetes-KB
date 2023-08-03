@@ -102,6 +102,8 @@ kubectl expose deploy mysql --port=80            # create proxy IP
 
 kubectl describe ing <nodename>                  # view ingress
 
+kubectl config get-contexts                      # how many clusters are you connected to
+
 
 
 
