@@ -1,7 +1,7 @@
 # Kubernetes-KB
 - Kubernetes concepts
 - Commands
-Note - Docker Host = Kubernetes Worker Node
+- Note - Docker Host = Kubernetes Worker Node
 ## Two Types of Clusters
 - Control Plane cluster 
     - all 4 components (kube-api | etcd | kube_scheduler | kube-controller ) are installed as conatainers
