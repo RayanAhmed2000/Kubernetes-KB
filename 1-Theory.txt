@@ -1,0 +1,273 @@
+HOST AND NETWORK ID
+-------------------
+
+Networking
+  Host Id 
+  subnet Id
+Network ID is the bit that denotes network
+Host ID denotes the host
+
+
+TOPICS
+------
+
+-> liveness and rediness probes 
+-> Prometheus and Grafana 
+-> Alerts OUM  
+-> Bash scriping DONE
+
+PROBES
+------
+
+Distributed systems like kuberneets can be hard to manage because there are multiple components working togethetr that are strictly deplendet on each other 
+Kubernets provides us with custom health check at different levels to make our deployment more robust
+we have
+
+Liveness -> checks if the container needs restart because of deadlock if not then kubernetes removes the pod and starts another one to replace it.
+Startup -> 
+Readiness - > lets kuberneets know when your application is ready to serve traffic if the readiness probe fails then kubernets will not send traffic to this pod.
+
+
+
+KUBERNETES COMMAND EXECUTION PROCESS
+------------------------------------
+
+Command - > KubeAPI -> Kubelet -> Kubescheduler -> Kubecontroller -> Kubelet -> Workeer Node
+Kubectl - command utility
+
+
+BRIDGE VS CALICO
+----------------
+Containers in diffrent bridge network cannot communicate with each other
+Containers in diffrent networks can ping each other
+
+CONTROL PLANE VS SYSTEM MODE INSTALLATION
+-----------------------------------------
+Control plane all services have their respective pods so that if one servoce fails others are not impacted
+System mode installation
+
+Namespaces are a way to organize clusters into virtual sub-clusters
+It is just like a project we can use to orgaize 
+By default namspace - kube-system
+
+ERRORS 
+------
+Crash loop back - Memory nahi mil rahi pod ko
+Image puul back - Wromg image us nam ki image exist nahi karti registery pe name or HTTP/HTTPS blocked 
+
+
+LABELS AND SELECTORS
+--------------------
+RC and DC use these to identify their pods
+LABELS - applied on pod/node side
+SELECTORS - applied on rc/rs/dc side
+RC me humesha LABEL aur SELECTOR ki value same hogi
+RC kehta hai jis bhi POD ka LABEL nginx hoga wo mera hoga
+
+
+POD SCHEDULING
+--------------
+
+NEED?
+I want that on this node only monitoring pods be created because these are battamiz POD they will eat up a lot of storage if they are scheduled somewhere else
+
+
+3 types
+Node based scheduling -> not used in production because we can define only one node and igf that node is not healthy then we will face downtime and pod will not be schgeduled
+
+labels and selectors based -> We will assign labels to NODES (kubectl label node <nodename> compute=monitoring)
+selector - Manifest me jake specs ke under we have to add a field nodeSelector:
+compute:monitoring
+
+DRAWBACK - It cannot ensure that other pods will not be scheduled on this node 
+it gives guarentee that your pod will run on a specific node but cant guarentee that other pods will not be scheduled on a specific node
+
+TAINTS AND TOLERATIONS
+To dedicate compute hardware inside cluster
+taint -> node/pod side
+tolerations -> rs/rc/deployment side
+if I tainted a node then only those pods having that tolerations can be scheduled on that node
+means I tainted node1 as NoSchedule Now no pods will be scheduled on this node only those having tolerations can be
+TAINT - kubectl taint node node1 application:NoSchedule
+
+if yoy taint a node while pod are running on it to wo bina toleration wlae podds ko bhaga ke kill kardega
+
+SUMMARY - taint and tolerations does not tell pod to go to a particular node instead it tells the node to only accept pod with certain toleartions.
+
+QUESTION?
+Why is pod not scheduled on master node?
+Because master node is tainted No schedule
+BUT agar kalko Tainted nodes down hogye to saare pods jinme toleratins hai kisi aur pe schedule ho jaenge
+
+
+VERY IMPORTANT - A combination of NodeAffinity and Taints and tolerations can be used to dedicate a particular node for a pod
+First use taints and toleratoions to prevent other pods being scheuled on this node and then use node affinity that is labels and selectors to prevent pods being scheduled on any othe rnode.
+
+
+What is the difference between RC and RS?
+If we have multiple labels, then in case of RC if any one labels matches RC kehta hai ye mera POD Hai
+And in case of RS jab tak saare labels match nahi hote tab tak wo nahi manta ki ye POD mera hai
+
+
+
+DEBUGGING
+---------
+Kubectl get logs <podname> view logs
+kubectl get events 
+
+What is node group
+A node group is one or more Amazon EC2 instances that are deployed in an Amazon EC2 Auto Scaling group. All instances in a node group must have the following characteristics: Be the same instance type. Be running the same Amazon Machine Image (AMI) Use the same Amazon EKS node IAM role.
+
+
+
+RESOURCE AND COMPUTE QUOTAS
+---------------------------
+
+Compute -> CPU/Memory/Storage
+Resource -> Pod, RS, RC deployment
+
+requests->200 mb 
+limit -> 300mb
+(200 to use kare hi but 300 se zada na jaye)
+
+specs:
+  resources:
+      requests:
+          memory:200Mi
+      limits:
+          memory:300Mi
+
+
+
+
+KUBERNETES NETWORKING
+---------------------
+
+Kube-proxy / service discovery
+service ip or kubeproxy provides endpoints for the application
+
+New pods automatically added into the endpoints of service ip
+HOW? by using labels
+
+SERVICE IP TYPES
+  - CLuster IP (Only accessibler from within pod)
+  - Node Port (Accessibler from outside)
+
+to make node port add --type=NodePort
+
+
+INGRESS
+-------
+
+Suppose I have a shopping website and I deploy it on AWS ASG now what will be the path 
+Domain -> DNS -> LB -> TG -> Instance 
+Now suppose I add a new feature where users can watch my streaming service and that I want to be on another TG because it has a diffrent kind of application enviroment setup
+so now
+i WANT My old website to be available at say DNS www.mystore.com/buy
+and new one at www.mystore.com/watch
+Now I need 1 LB for ww.mystore.com/buy
+And 1 for ww.mystore.com/watch 
+And yet one for path based routing /buy or /wear
+and that will cost me bills
+As well as I need to enable ssl for my application so that my users can access via https
+
+Now thats a lot of configuration and expensive as well
+
+Now wouldnt it be nice if we could manage all of this from within kubernetes cluster with the help of a service that has a yml file that lives along the rest of our application deployment file.
+
+INGRESS HELPS YOUR USERS ACCESS YOUR KUBERNETES APPLICATION USING A SINGLE EXTERNALLY ACCESSIBLE URL THAT WE CAN CONFIGURE TO ROUTR TRAFFIC BASED ON PATH AS WELL AS IMPLIMENT SSL SECURITY AS WELL
+
+
+
+
+EKS
+---
+
+AWS kabhi bhi master node ka access nahi deta 
+If access karna hai to Bastion se karna hoga
+/.kube/config wali file paste karni hogi apni machine pe
+
+Best practice is to run 1 conatiner inside 1 POD
+Because IP is Proided on POD Bases so all conatiner insdide single pod will have same IP
+so you can have multiple containers insode 1 pod just for support not for load balancing
+
+
+HELM
+----
+
+- package manager for kubernetes
+- bundle of YAML files are known as HELM CHARTS
+- you can push your helm chart onto helm repository or download existing ones
+- mongoDB Mysql or setup of any monitoring tool such as prometheus or grafana helm charts can be found 
+- we can search deployments on Helm repo 'helm search <keyword>'
+
+DAEMON SETS
+-----------
+
+If I want a particular pod to run on every node then I'll use daemon set
+for example I want to collect logs on each node using elasticache then I create a DS with elasticahce running and that pod will be scheduled on each off my nodes and if a node is removed or deletd then the pod will be deleted as well similarly if a new node comes up the pod of DS will bestarted on it automatically
+
+STATEFUL SETS
+-------------
+
+Used in scenarios where there is kind of a syn between pods i.e. multiple pods are working in collaborations and we do not want our pod names to be changes everytime a new pod starts in place of a former pod that got terminated due to some kind of error because if that happens the sync could break as we are using hard coded values here and if we use IP then its also dynamic it chnages and the also a random name is given to pod evrytime 
+
+So consider a scenaro 
+Where
+
+DB-01 (master)
+^
+|
+DB-02(Read replicas)
+DB-03(Read replicas)
+
+now even if the pod restarts or fails it will always come up with the same name
+
+
+EXIT CODES
+-----------
+
+- In case if the container got exited/terminated unexpectedly, container engines reports why the container got terminated with exit codes.
+
+CODE #	Reason	details
+Exit Code 0	Purposely stopped	Used by developers/devops/sre to indicate that the container was automatically stopped
+Exit Code 1	Application error	Container was stopped due to application error or incorrect reference in the image/configuration specification
+Exit code 137 means a container or pod is trying to use more memory than it’s allowed. 
+
+
+BLUE-GREEN DEPLOYMENT
+---------------------
+
+There are most of the organization has been followed/ing the Blue-Green Deployment and have proved it as safe method for continuous deployment.
+-> strategy in which you create two separate, but identical environments.
+  - One environment (blue) is running the current application version
+  - One environment (green) is running the new or to-be application version.
+
+Only one enviroment is live at a time 
+In that way we can perform app upgrade on one when it is done route traffc to it till that time it will act as staging area
+
+POD STATUS:
+----------
+
+Pending: This state shows at least one container within the pod has not yet been created.
+Running: All containers have been created, and the pod has been bound to a Node. At this point, the containers are running, or are being started or restarted.
+Succeeded: All containers in the pod have been successfully terminated and will not be restarted.
+Failed: All containers have been terminated, and at least one container has failed. The failed container exists in a non-zero state.
+Unknown: The status of the pod cannot be obtained.
+
+CRASH LOOP BACK OFF
+-------------------
+
+Insufficient resources—lack of resources prevents the container from loading
+Locked file/database/port—a resource already locked by another container
+No proper reference/Configuration—reference to scripts or binaries that are not present on the container or any misconfiguration on underlying system such as read-only filesystem
+Config loading/Setup error—a server cannot load the configuration file or initial setup like init-container failing
+Connection issues—DNS or kube-DNS is not able to connect to a external services
+Downstream service – One of the downstream services on which the application relies can’t be reached or the connection fails (database, backend, etc.)
+Liveness probes– Liveness probes could have misconfigured or probe fails due to any reason.
+Port already in use: Two or more containers are using the same port, which doesn’t work if they’re from the same Pod
+  
+ALERT MANAGER
+-------------
+
+ALert manager is a pod that triggeres mail and alerts on emails or slack
