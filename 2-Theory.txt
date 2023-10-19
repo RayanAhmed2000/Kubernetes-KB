@@ -1,0 +1,95 @@
+ENVIROMENT VARIABLES in Kubernetes
+-----------------------------------
+
+apiVersion:v1
+kind:Pod
+metadata:
+  name:env-var
+  labels:
+    purpose: demonstrate-env-var
+  spec:
+    containers:
+    -name: env-var-container
+    image: wordpress
+    env:
+      -name: WORDPRESS_VERSION
+      value: "5.2.2"
+      -name: WORDPRESS_USER
+      value: "ubuntu"
+
+Drawback
+- Enviroment variable is local to a particular container 
+- if we want to use an env in multiple pods we will have to edit manifest files of all the pods
+- SOLUTION -> Config Maps
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+CONFIG MAPS IN KUBERNETES
+-------------------------
+
+- A config map is an API object used to store non confidential information in key value pairs
+- now the same config map can be attahced to multiple pods 
+- Config Map is scoped to a nampespace
+- Namespace A ke configmap ko sirf use namespace ke pods use kar paenge
+
+CREATION
+IMPERATIVE WAY
+
+# kubectl create configmao <name> --from-literal=<key>=<value>
+
+# kubectl create configmao <name> 
+--from-literal=<key>=<value>
+--from-literal=<key>=<value>
+--from-literal=<key>=<value>
+
+# kubectl create configmap <name> --from-file=<file-name>
+
+DECLARATIVE WAY
+- using manifest
+
+apiVersion:v1
+kind: ConfigMap
+metadata:
+  name:my-configmap
+data:
+  wordpress_version: "5.2.2"
+  wordpress_user: "ubuntu"
+
+
+USING CONFIG MAPS IN PODS
+https://www.youtube.com/watch?v=EKDmz49BhX8
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+What are secrets in Kubernetes?
+A Secret is an object that contains a small amount of sensitive data such as a password, a token, or a key
+Sensitive information
+- username
+- password 
+encodes in base64 and creates an object out of it and this object can be mounted 
+to any pod and used 
+
+Imperative way
+
+# kubectl create secret <secret-type> <secret-name> --from-literal=<key>=<value>
+
+
+# kubectl create secret <secret-type> <secret-name> --from-file=<path-to-file>
+
+Declarative way
+
+<using manifest>
+
+
+TYPES OF SECRETS
+
+1- GENERIC
+2- DOCKER-REGISTRY
+3- TLS
+
+
+
+
+
+
