@@ -1,0 +1,138 @@
+Which Linux flavour you have worked on?
+
+Command to list out processes?
+  Top and htop
+  ps -ef
+
+Components of Kubernetes.
+
+How will you take backup off Kubernetes?
+  - ETCD already have the current state just need to take backup of ETCD
+
+What do you know about filters?
+ Grep
+ AWK 
+ CUT
+
+What have you worked on till now?
+  - I am currently working as ....
+  - We are the first point of contact
+  - So in our support we perform many tasks as apart of esuring the availability of clients infrastructure
+      - monitoring
+      - auditing
+      - patching
+      - GSTN
+    
+
+
+What do you know about kubernetes?
+  How does self healing work
+  How does High Availability work (RC and DC)
+
+I have an application running on POD and developer comes with some changes I want to make changes to the POD What do you think will be the downtime
+No downtime if we use DC because in dc we define MaxSurge, MaxUnavailable
+
+
+What happens when POD exceeds CPU and memory ?
+Whenever a pod exceeds its memory limit a signal SIGKILL is sent which immediately terminates the container and spawns a new one with OOM(out of memory) error.
+If memory consumption increases pod will be terminated but in case of CPU, os can allow tiny time slices to consume more than allowed CPU share.
+
+SRE Activities?
+- monitoring
+
+Are you OK with this Job?
+
+What are init containers?
+init conatiners are just like normal conatiners that run before the main conatiner starts
+like ec2 user data 
+
+
+What is reqiuitred to monitor EKS ?
+  - CloudWatch Container Insights provides a comprehensive metrics monitoring solution for Amazon EKS at the cluster, node, pod, task, and service level. Amazon EKS also supports multiple options for metrics capture with Prometheus
+
+
+Staus Codes
+200 OK. The 200 OK status code indicates the request succeeded. ...
+303 See Other. The 303 See Other status code indicates that you are being redirected to another resource via the "Location" response header. ...
+400 Bad request. ...
+404 Resource not found Authentication error
+500 Internal server error.
+
+If everything is managed by Kubernetes then why do we need monitoring
+Kubernetes monitoring allows cluster administrators and users to monitor the cluster and identify issues such as insufficient resources, failures, pods that are unable to start, or nodes that cannot join the cluster.
+
+What do you know about kubernetes logs?
+
+Youre watching a movie and it suddenly stops? What will you do?
+Dont answer CHeck internet connectivity
+ANswer like a SRE 
+  PODS
+  Network Ingress
+  Logs
+
+Drawbacks of docker over Kubernetes?
+ - No centralized management
+ - Single point of failure
+ - No communication between Containers running on different host
+ - No Scalability
+ - Volume attach manually
+
+What are your goals in case we select you?
+Well I guess if thr position is of SRE Then an SRE engineer is responsible for 
+  Reliability Scalability and HIgh availability
+  Change managment
+
+KUbeadm- allows to setup highly available multi node setup
+minikube - simpler setup on just one node
+Vanilla kubernetes - most basic kubernetes
+
+
+Do you know about node groups and nodes?
+Nodes are VM or EC2 instances 
+Node groups are group of EC2 instances
+
+
+
+
+Name a service which is similar to ASG in K8s / How is autoscaling achieved in kubernetes.
+-> HPA and VPA for POD scaling and ClusterAutoscaling for Node based scaling
+
+HPA & VPA & CA
+-> HPA scales the number of pods and VPA assigns more resources to existing pods if the threshold is met.
+   Scales your cluster nodes based on additional capacity needs for example some pods go to pending state due to resource starvation
+   then it will request AWS for some additional nodes on which pods will then be scheduled.
+
+HPA 
+First create a deployment 
+then create a servioice and expose deployment to the srevice for example php-service
+then we create hpa 
+kubectl autoscale deployment php-srevice --cpu-percentage=50 --min=1 --max=10
+
+
+VPA
+2 types of resource configurations
+-> Requests - minimum number of resources that containers need
+-> Limits - maximum number of resources that a given container can consume
+
+
+RDS, DynamoDB
+have you worked on Terraform?
+Yes
+Have you done scripting? which scripting lang you know
+Have you used caching like redis?
+What is you day to day task as a SRE in TTN?
+
+If an alert comes and you resolve it, and if that alert comes again next time how would you know what have you done previously to resolve it?
+How the traffic flows from the user to the pods on which the application is running.
+domain 
+DNS
+Load balance
+TG
+Instance
+Ingress
+Servrice Proxy
+POD
+
+VPC, subnets, IGW, NAT Gateway, Route tables, ASG
+How traffic flows from EC2 to end user, and vice versa.
+How would you insert data in a Database using SQS & SNS.
