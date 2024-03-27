@@ -36,9 +36,20 @@ kubectl logs <podname> -n namespace -c <containername>   # shows logs of  a spec
 
 kubectl logs <podname> -n namespace -all-conatiners=true  #show logs of all conatiners in a namespace
 
+kubectl top pod                            # show resource utilization of pods
+
 kubectl get componentstatus                # shows status of components
 
-kubectl top pod                            # show resource utilization of pods
+When you run this command, Kubernetes returns information about each component's health status, indicating whether they are functioning properly or if there are any issues. The output typically includes the name of the component and its status, which can be one of the following:
+Healthy: The component is functioning properly.
+Unhealthy: The component is experiencing issues and may not be working correctly.
+Unknown: The status of the component could not be determined.
+NAME                 STATUS    MESSAGE              ERROR
+controller-manager   Healthy   ok                   
+scheduler            Healthy   ok                   
+etcd-0               Healthy   {"health": "true"}
+
+
 
 
 CREATE DEPLOYMENT
