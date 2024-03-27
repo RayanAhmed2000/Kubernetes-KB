@@ -19,6 +19,7 @@ metadata:
 
 Drawback
 - Enviroment variable is local to a particular container 
+- use for passing parameter to an application
 - if we want to use an env in multiple pods we will have to edit manifest files of all the pods
 - SOLUTION -> Config Maps
 
