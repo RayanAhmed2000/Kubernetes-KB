@@ -115,7 +115,12 @@ kubectl config current-context                  # list out your current cluster
 kubectl config get-contexts                     # List out all clusters
 
 
+# kubectl create configmao <name> --from-literal=<key>=<value>
 
+# kubectl create configmao <name> 
+--from-literal=<key>=<value>
+--from-literal=<key>=<value>
+--from-literal=<key>=<value>
 
 
 
