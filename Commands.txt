@@ -106,7 +106,13 @@ kubectl config get-contexts                      # how many clusters are you con
 
 
 
+KUBERNETES CLUSTER COMMANDS (EKS)
 
+kubectl config use-context <arn>                # Switch to a particular cluster
+ 
+kubectl config current-context                  # list out your current cluster
+ 
+kubectl config get-contexts                     # List out all clusters
 
 
 
