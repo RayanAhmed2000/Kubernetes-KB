@@ -32,6 +32,14 @@ What do you know about kubernetes?
 I have an application running on POD and developer comes with some changes I want to make changes to the POD What do you think will be the downtime
 No downtime if we use DC because in dc we define MaxSurge, MaxUnavailable
 
+What are services in Kubernetes?
+In Kubernetes, services are an abstraction that enable networking functionality for Pods. 
+
+Cluster IP - exposes a servoce to ClusterIP/load balancing across Pods.
+NodePort Service - exposes a service to a port on each node.
+ClusterIP services are used for internal communication within the cluster, while NodePort services are used to expose services externally to network clients outside the cluster. 
+Headless Service - 
+Ingress Controller - Not technically a service, but it's a Kubernetes resource helps in path based routing and load balancing
 
 What happens when POD exceeds CPU and memory ?
 Whenever a pod exceeds its memory limit a signal SIGKILL is sent which immediately terminates the container and spawns a new one with OOM(out of memory) error.
