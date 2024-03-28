@@ -102,6 +102,23 @@ VERY IMPORTANT - A combination of NodeAffinity and Taints and tolerations can be
 First use taints and toleratoions to prevent other pods being scheuled on this node and then use node affinity that is labels and selectors to prevent pods being scheduled on any othe rnode.
 
 
+RC (Replication Controller):
+A Replication Controller is an older, now deprecated, Kubernetes resource that ensures a specified number of pod replicas are running at any given time.
+It continuously monitors the state of pods and ensures that if any pods fail or are deleted, new pods are created to replace them to maintain the desired replica count.
+Replication Controllers are considered the precursor to more advanced controllers like Deployments and ReplicaSets.
+RS (ReplicaSet):
+A ReplicaSet is the successor to the Replication Controller and is an enhanced version of it.
+Like the Replication Controller, a ReplicaSet ensures that a specified number of pod replicas are running at any given time.
+However, ReplicaSets offer more powerful selectors for matching pods and support more sophisticated update strategies, such as rolling updates and scaling.
+ReplicaSets are generally preferred over Replication Controllers for managing pod replicas in modern Kubernetes deployments.
+DC (Deployment Controller):
+A Deployment Controller is a higher-level abstraction built on top of ReplicaSets.
+Deployments provide declarative updates to applications by managing ReplicaSets and Pods.
+They enable you to define the desired state of your application, including the number of replicas, the image to use, and the update strategy.
+Deployments automatically create and manage the underlying ReplicaSets and Pods to achieve the desired state.
+Deployments are the recommended way to manage stateful applications in Kubernetes due to their flexibility, ease of use, and support for rolling updates and rollbacks.
+In summary, RC (Replication Controller) is an older resource that has been replaced by RS (ReplicaSet) and Deployment Controllers in modern Kubernetes deployments. RS (ReplicaSet) is used for managing pod replicas with more advanced features than the Replication Controller. Deployment Controllers provide a higher-level abstraction for managing application updates and stateful deployments with built-in support for rolling updates and rollbacks.
+
 What is the difference between RC and RS?
 If we have multiple labels, then in case of RC if any one labels matches RC kehta hai ye mera POD Hai
 And in case of RS jab tak saare labels match nahi hote tab tak wo nahi manta ki ye POD mera hai
