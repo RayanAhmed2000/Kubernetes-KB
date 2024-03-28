@@ -92,6 +92,15 @@ Nodes are VM or EC2 instances
 Node groups are group of EC2 instances
 
 
+How to drain Daemon pods from Nodes?
+first cordon the node
+kubectl cordon nodename
+
+gracefully evict the non daemon pods
+kubectl drain nodename --ignore-daemonsets
+
+Now manually evict the daemon sets
+
 
 
 Name a service which is similar to ASG in K8s / How is autoscaling achieved in kubernetes.
