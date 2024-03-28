@@ -135,5 +135,9 @@ kubectl config get-contexts                     # List out all clusters
 
 
 
+# kubectl create secret <secret-type> <secret-name> --from-literal=<key>=<value>
+
+# kubectl create secret <secret-type> <secret-name> --from-file=<path-to-file>
+
 
 
