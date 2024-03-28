@@ -36,3 +36,22 @@ Kubeproxy error
 
 
 
+
+PVC Trouble shooting
+--------------------
+Following three issues can occur
+Persistent Volume creation issue: Kubernetes had a problem creating the persistent volume or enabling access to it, even though the underlying storage resources exist.
+Persistent Volume provisioning issue: Kubernetes could not create the required persistent volume because storage resources were unavailable.
+Changes in specs: Kubernetes had a problem connecting a pod to the required Persistent Volume because of a configuration change in the PV or PVC.
+
+Reasons - 
+FailedAttachVolume - pichle node se detach hoke ye wale node pe attach nahi ho paa rahi hai Volume
+FailedMount - Jab volume mount nahi ho paegi right path pe Agar FailedAttachVolume aega matlb ye bi ana hai 
+CrashLoopBackOff caused by PersistentVolume Claim - 
+
+Since Kubernetes can’t automatically handle the FailedAttachVolume and FailedMount errors on its own, sometimes you have to take manual steps.
+
+
+
+
+
