@@ -33,12 +33,13 @@ I have an application running on POD and developer comes with some changes I wan
 No downtime if we use DC because in dc we define MaxSurge, MaxUnavailable
 
 What are services in Kubernetes?
-In Kubernetes, services are an abstraction that enable networking functionality for Pods. 
+In Kubernetes, services are an abstraction that enable networking functionality for Pods. Since the kubernetes enviroment is very unstable so when we reschedyule a pod on othernode or new pod comes UP the IP changes so there will issues in accessing the application running in kubernetes because the IP is changing dynamilcally
 
 Cluster IP - exposes a servoce to ClusterIP/load balancing across Pods.
-NodePort Service - exposes a service to a port on each node.
+NodePort Service - exposes a service to a port on each node. for accessing application outside the cluster.
 ClusterIP services are used for internal communication within the cluster, while NodePort services are used to expose services externally to network clients outside the cluster. 
-Headless Service - 
+LOad Balancer Service - Used in cases where our infra is on cloud in that case we provision an external lb
+Headless Service - PODS want to communicate directly with each other without cluster IP Instead, it allows direct communication with individual Pods of the service through their DNS names.
 Ingress Controller - Not technically a service, but it's a Kubernetes resource helps in path based routing and load balancing
 
 What happens when POD exceeds CPU and memory ?
