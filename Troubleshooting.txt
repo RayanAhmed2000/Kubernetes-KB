@@ -34,8 +34,14 @@ Config loading/Setup error—a server cannot load the configuration file or init
 Liveness probes– Liveness probes could have misconfigured or probe fails due to any reason.
 Kubeproxy error
 
-
-
+ImagePullBackOff
+---------------
+Image is not defined properly - check events usme aa jaega FailedtoPullImage / could be either from a typo
+Tag may changed/missing/incorrect - image tag you’re trying to pull is retired
+Image missing/incorrect - push kari image wo upload nhai hui phir usko pull karke bana rahe hain agar pod 
+Image may private, and there is a auth failure - Private Image Registry and Wrong Credentials
+Network Issue - POD Not able to pull image due to network issue
+Conatiner Registry Rate Limits - some registries have implimented rate limits
 
 PVC Trouble shooting
 --------------------
@@ -44,13 +50,17 @@ Persistent Volume creation issue: Kubernetes had a problem creating the persiste
 Persistent Volume provisioning issue: Kubernetes could not create the required persistent volume because storage resources were unavailable.
 Changes in specs: Kubernetes had a problem connecting a pod to the required Persistent Volume because of a configuration change in the PV or PVC.
 
-Reasons - 
+Reasons - kubectl describe pod podname karoge to dikhega ye error events me
 FailedAttachVolume - pichle node se detach hoke ye wale node pe attach nahi ho paa rahi hai Volume
 FailedMount - Jab volume mount nahi ho paegi right path pe Agar FailedAttachVolume aega matlb ye bi ana hai 
 CrashLoopBackOff caused by PersistentVolume Claim - 
 
 Since Kubernetes can’t automatically handle the FailedAttachVolume and FailedMount errors on its own, sometimes you have to take manual steps.
 
+Other Disk Related Issues in Kubernetes
+
+"node file sytem filling up" - Extend EBS size/Clear data/docker system prune/docker system prune -a
+"persistent volume filling up" - Expand PVC by editing Yaml/only gp2 class ka expand hota hai/allow volume expansion =true
 
 
 
