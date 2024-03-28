@@ -1,6 +1,6 @@
 GENERAL DEBUGGING
 -----------------
-Kubectl get logs <podname> view logs
+Kubectl logs <podname> view logs
 kubectl get events 
 
  If there’s a problem with the scheduler, it could prevent Pods from being scheduled. You can check the scheduler’s logs with the 
