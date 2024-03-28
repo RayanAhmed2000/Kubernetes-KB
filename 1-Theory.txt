@@ -43,17 +43,15 @@ Containers in diffrent networks can ping each other
 
 CONTROL PLANE VS SYSTEM MODE INSTALLATION
 -----------------------------------------
-Control plane all services have their respective pods so that if one servoce fails others are not impacted
-System mode installation
+Control plane all services have their respective pods so that if one servoce fails others are not impacted /  allows for better scalability, fault isolation, and management of the control plane components.
+
+System mode installation  refers to a deployment model where the control plane components are installed directly on the worker nodes themselves.
+combining the roles of running application workloads and managing the cluster's state.
+Simple for small worloads / not fault tolerant.
 
 Namespaces are a way to organize clusters into virtual sub-clusters
 It is just like a project we can use to orgaize 
 By default namspace - kube-system
-
-ERRORS 
-------
-Crash loop back - Memory nahi mil rahi pod ko
-Image puul back - Wromg image us nam ki image exist nahi karti registery pe name or HTTP/HTTPS blocked 
 
 
 LABELS AND SELECTORS
