@@ -1,7 +1,17 @@
+GENERAL DEBUGGING
+-----------------
+Kubectl get logs <podname> view logs
+kubectl get events 
+
+check events
+check pod logs
+check scheduler pod logs
+check node affinity taint and tolerations pvc image name 
+
+
 PENDING STATE
-
+-------------
 “Pending” status for a Pod means that the Pod has been accepted by the K8s system, but it hasn’t been scheduled for running on a node yet
-
 REASONS
 - resource crunch
 - taint and tolerations
@@ -12,24 +22,13 @@ REASONS
 - Kubescheduler ka pod that is on master node is not running
 
 
-TROUBLESHOOTING
-
-check events
-check pod logs
-check scheduler pod logs
-check node affinity taint and tolerations pvc image name 
-
-
-
 CRASH LOOP BACK
-
+---------------
 Insufficient resources—lack of resources prevents the container from loading
 Locked file/database/port—a resource already locked by another container
 Config loading/Setup error—a server cannot load the configuration file or initial setup like init-container failing
 Liveness probes– Liveness probes could have misconfigured or probe fails due to any reason.
 Kubeproxy error
 
-TROUBLSHOOTING
 
-check events
-check pod logs
+
