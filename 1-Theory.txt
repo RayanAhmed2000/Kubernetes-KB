@@ -218,12 +218,16 @@ HELM
 
 DAEMON SETS
 -----------
+It is typically used for deploying system daemons or background services that need to run on every node, such as log collection agents, monitoring agents, or storage daemons.
 
 If I want a particular pod to run on every node then I'll use daemon set
 for example I want to collect logs on each node using elasticache then I create a DS with elasticahce running and that pod will be scheduled on each off my nodes and if a node is removed or deletd then the pod will be deleted as well similarly if a new node comes up the pod of DS will bestarted on it automatically
 
 STATEFUL SETS
 -------------
+
+A StatefulSet is used to manage stateful applications that require stable, unique identities for each pod, and require ordered deployment and scaling.
+It maintains a sticky identity for each pod,
 
 Used in scenarios where there is kind of a syn between pods i.e. multiple pods are working in collaborations and we do not want our pod names to be changes everytime a new pod starts in place of a former pod that got terminated due to some kind of error because if that happens the sync could break as we are using hard coded values here and if we use IP then its also dynamic it chnages and the also a random name is given to pod evrytime 
 
