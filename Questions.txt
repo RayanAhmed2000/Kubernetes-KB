@@ -31,6 +31,8 @@ What do you know about kubernetes?
 
 I have an application running on POD and developer comes with some changes I want to make changes to the POD What do you think will be the downtime
 No downtime if we use DC because in dc we define MaxSurge, MaxUnavailable
+maxSurge specifies the maximum number of additional pods that can be created beyond the desired number of replicas during a rolling update.
+maxUnavailable specifies the maximum number or percentage of pods that can be unavailable (not ready) during a rolling update.
 
 What are services in Kubernetes?
 In Kubernetes, services are an abstraction that enable networking functionality for Pods. Since the kubernetes enviroment is very unstable so when we reschedyule a pod on othernode or new pod comes UP the IP changes so there will issues in accessing the application running in kubernetes because the IP is changing dynamilcally
