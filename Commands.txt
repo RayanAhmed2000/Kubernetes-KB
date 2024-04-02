@@ -74,6 +74,12 @@ kubectl delete service <deployment-name>    # delete kube-proxy
 
 kubectl describe deploy <deploymentname>    # describe deployment
 
+kubectl expose deploy mysql --port=80            # create proxy IP
+
+kubectl describe ing <nodename>                  # view ingress
+
+kubectl config get-contexts                      # how many clusters are you connected to
+
 
 
 
@@ -104,16 +110,6 @@ kubectl taint node node1 application:NoSchedule        # How to taint nodes
 kubectl describe nodes <nodename> | grep -iA5 allocated  # see how much resource quota is allocated
 
 kubectl create quota demo --hard=pods=10 #sirf 10 pods ban payen default namespace me
-
-
-
-KUBERNETES NETWORKING
-
-kubectl expose deploy mysql --port=80            # create proxy IP
-
-kubectl describe ing <nodename>                  # view ingress
-
-kubectl config get-contexts                      # how many clusters are you connected to
 
 
 
