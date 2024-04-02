@@ -5,13 +5,21 @@ if we have a databse in a pod and it restarts then all databse data is gone.
   storage is like a plugin to kubernetes cluster wether local or remote like EBS or Google Cloud storage
   they are not scoped to a particular namespace they are accessible to the whole cluster
 
-  
+Persistent Kyun?
+POD gya storage gyi
+Node gya storage gyi / Kisi aur Node pe schedule hogya pod storage ni access kar paega dusre node ki
+
+is liye aesa storage jo saare pods aur aur node access kar payen -> PERSISTENT STORAGE
+
+
 We can create PV from yaml file.
+PV us storage ka description hai jo hum cluster me use karenge it can be on AWS S3/EBS or Google Cloud or even On-Prem Storage
+"a piece of storage provisioned by an administrator that lies outside the cluster"
+PVC is a request jo ki pod karta hai to use the PV
+"a request for storage by a user or application. It's a way for Pods to consume persistent storage"
 
 
-Kubernetes Volume
-
-PV AND PVC is not in EKS 
+Kubernetes Volume -> PV AND PVC is not in EKS 
 
 1- PV (Persistent Volume) -> it contains the storage server information 
   2- pvc (Persistant Volume claim) -> it is request for PV that end user or application makes 
@@ -27,10 +35,10 @@ Volume provisioning types
 
 acccess modes in pv->
 
-1 ReadWriteOnce -> 1 time pe 1 node ke kitne bhi POD Readwrite kar skte 
-2 ReadWriteMany -> 1 time pe sare nodes ke saare pod ReadWrite kar skte
-3 ReadOnlyMany -> Sirf aur sirf read kar skte hain
-4 ReadWriteOncePOD - > Ek time pe ek hi POD 
+1 ReadWriteOnce -> 1 time pe 1 POD Read write karne ke liye access karega 
+2 ReadWriteMany -> 1 time pe multiple PODS Read write karne ke liye access karenge
+3 ReadOnlyMany -> Multiple PODS ek saath Sirf read karenge
+4 ReadWriteOncePOD - > Ek time pe ek hi POD write karega
 
 PVReclaimPolicy
 1 Recycle
