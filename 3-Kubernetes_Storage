@@ -1,0 +1,49 @@
+In kubernetes we need a persistent volume
+if we have a databse in a pod and it restarts then all databse data is gone.
+  so we need a storage that does not depend on the pod lifecycle i.e. it lies outside the pod
+  also we dont know on which node our pod will restart so that storage must be available to all nodes in the cluster
+  storage is like a plugin to kubernetes cluster wether local or remote like EBS or Google Cloud storage
+  they are not scoped to a particular namespace they are accessible to the whole cluster
+
+  
+We can create PV from yaml file.
+
+
+Kubernetes Volume
+
+PV AND PVC is not in EKS 
+
+1- PV (Persistent Volume) -> it contains the storage server information 
+  2- pvc (Persistant Volume claim) -> it is request for PV that end user or application makes 
+
+pv is a persisstemnt volume it contains storage srver information
+without pv we cannot create pvc
+5 gb ka pv banaya
+3 gb ka pvc aya to use pv se bound kardia
+
+Volume provisioning types
+1 static -> we need to manually create pv 
+2 dynamic -> all the information of storage server we provide to API, API creates pv automatically
+
+acccess modes in pv->
+
+1 ReadWriteOnce -> 1 time pe 1 node ke kitne bhi POD Readwrite kar skte 
+2 ReadWriteMany -> 1 time pe sare nodes ke saare pod ReadWrite kar skte
+3 ReadOnlyMany -> Sirf aur sirf read kar skte hain
+4 ReadWriteOncePOD - > Ek time pe ek hi POD 
+
+PVReclaimPolicy
+1 Recycle
+2 Retain
+3 Deleted
+
+pv status 
+
+1 Available -> not attahced to a pvc
+2 Released -> attached tha lekin pvc delete hogya
+3 bound -> attached hai
+
+NOTE
+1 pv only 1 pvc se attached ho skta hai
+pv -> clustrer level
+pvc -> namespace level 
