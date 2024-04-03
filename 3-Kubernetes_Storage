@@ -36,14 +36,14 @@ Volume provisioning types
 acccess modes in pv->
 
 1 ReadWriteOnce -> 1 time pe 1 POD Read write karne ke liye access karega 
-2 ReadWriteMany -> 1 time pe multiple PODS Read write karne ke liye access karenge
+2 ReadWriteMany -> 1 time pe  multiple PODS Read write karne ke liye access karenge
 3 ReadOnlyMany -> Multiple PODS ek saath Sirf read karenge
 4 ReadWriteOncePOD - > Ek time pe ek hi POD write karega
 
-PVReclaimPolicy
-1 Recycle
-2 Retain
-3 Deleted
+PVReclaimPolicy - If PVC is deleted then uske data ka kya karna hai? Jo PV me pada hua hai
+1 Recycle - depreciated
+2 Retain - Us ko save rakho admin manually hataega usko 
+3 Deleted - PVC delete ho jaye to uske dwara likha gya hua data bi delete ho jaye
 
 pv status 
 
