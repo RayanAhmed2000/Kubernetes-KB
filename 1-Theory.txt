@@ -187,11 +187,15 @@ and that will cost me bills
 As well as I need to enable ssl for my application so that my users can access via https
 
 Now thats a lot of configuration and expensive as well
-
 Now wouldnt it be nice if we could manage all of this from within kubernetes cluster with the help of a service that has a yml file that lives along the rest of our application deployment file.
 
 INGRESS HELPS YOUR USERS ACCESS YOUR KUBERNETES APPLICATION USING A SINGLE EXTERNALLY ACCESSIBLE URL THAT WE CAN CONFIGURE TO ROUTR TRAFFIC BASED ON PATH AS WELL AS IMPLIMENT SSL SECURITY AS WELL
 
+Ingress is an API object in Kubernetes 
+which helps in accessing your application running inside kubernetes from outside via http and https
+path based routing
+host based routing
+ssl termination
 
 
 
