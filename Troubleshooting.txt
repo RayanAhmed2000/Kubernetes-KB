@@ -21,25 +21,18 @@ REASONS
 - taint and tolerations
 - node affinity
 - pvc : if pod is dependent on PV and the pv is not ready 
-- init container
-- image pull back error
 - Kubescheduler ka pod that is on master node is not running
 
 
 CRASH LOOP BACK
 ---------------
-Insufficient resources—lack of resources prevents the container from loading
+Resource cruch not
 Locked file/database/port—a resource already locked by another container
-Config loading/Setup error—a server cannot load the configuration file or initial setup like init-container failing
 Liveness probes– Liveness probes could have misconfigured or probe fails due to any reason.
-Kubeproxy error
 
 ImagePullBackOff
 ---------------
-Image is not defined properly - check events usme aa jaega FailedtoPullImage / could be either from a typo
-Tag may changed/missing/incorrect - image tag you’re trying to pull is retired
-Image missing/incorrect - push kari image wo upload nhai hui phir usko pull karke bana rahe hain agar pod 
-Image may private, and there is a auth failure - Private Image Registry and Wrong Credentials
+Image is not defined properly - check events usme aa jaega FailedtoPullImage / could be either from a typo or Image may private -> failure - Private Image Registry and Wrong Credentials
 Network Issue - POD Not able to pull image due to network issue
 Conatiner Registry Rate Limits - some registries have implimented rate limits
 
@@ -71,16 +64,3 @@ Running: All containers have been created, and the pod has been bound to a Node.
 Succeeded: All containers in the pod have been successfully terminated and will not be restarted.
 Failed: All containers have been terminated, and at least one container has failed. The failed container exists in a non-zero state.
 Unknown: The status of the pod cannot be obtained.
-
-CRASH LOOP BACK OFF
--------------------
-
-Insufficient resources—lack of resources prevents the container from loading
-Locked file/database/port—a resource already locked by another container
-No proper reference/Configuration—reference to scripts or binaries that are not present on the container or any misconfiguration on underlying system such as read-only filesystem
-Config loading/Setup error—a server cannot load the configuration file or initial setup like init-container failing
-Connection issues—DNS or kube-DNS is not able to connect to a external services
-Downstream service – One of the downstream services on which the application relies can’t be reached or the connection fails (database, backend, etc.)
-Liveness probes– Liveness probes could have misconfigured or probe fails due to any reason.
-Port already in use: Two or more containers are using the same port, which doesn’t work if they’re from the same Pod
-
