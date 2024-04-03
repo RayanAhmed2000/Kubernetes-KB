@@ -66,6 +66,8 @@ kubectl describe pod <podname> | grep -i controller   #if you want to see if a p
 
 kubectl scale --replica=4 deploy mysql      # command se replica ka size badana in deployment
 
+kubectl autoscale deployment php-srevice --cpu-percentage=50 --min=1 --max=10    # autoscale deployment 
+
 kubectl expose deploy <deployemnt-name> --port=80   # create kube-proxy
 
 kubectl get service                         # see kube-proxy
