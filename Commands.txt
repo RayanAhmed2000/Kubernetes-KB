@@ -122,6 +122,8 @@ kubectl config current-context                  # list out your current cluster
 kubectl config get-contexts                     # List out all clusters
 
 
+SECRETES AND CONFIG MAPS 
+
 # kubectl create configmao <name> --from-literal=<key>=<value>
 
 # kubectl create configmao <name> 
@@ -129,11 +131,30 @@ kubectl config get-contexts                     # List out all clusters
 --from-literal=<key>=<value>
 --from-literal=<key>=<value>
 
-
-
 # kubectl create secret <secret-type> <secret-name> --from-literal=<key>=<value>
 
 # kubectl create secret <secret-type> <secret-name> --from-file=<path-to-file>
 
+PERSISTENT VOLUME IN KUBERNETES
+
+kubrctl get pv
+
+kubrctl get pvc
+
+kubectl create -f pv.yml
+
+kubectl create -f pvc.yml
+
+kubectl describe pv pvname
+
+kubectl describe pvc pvcname
+
+kubectl delete pv pvname
+
+kubectl delete pvc pvcname
+
+kubectl edit pv pvname
+
+kubectl edit pvc pvcname
 
 
