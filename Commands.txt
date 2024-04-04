@@ -160,3 +160,21 @@ kubectl edit pv pvname
 kubectl edit pvc pvcname
 
 
+
+How will you access your EKS cluster via your local machine?
+
+configur AWS termianl access key and secret access key
+configure kubectl on terminal
+
+kubectl eks update-kubeconfig --region us-east-1 --name clustername 
+
+
+
+
+
+
+
+
+
+
+
