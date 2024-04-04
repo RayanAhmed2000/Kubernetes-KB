@@ -1,0 +1,37 @@
+To list RBAC resources:
+
+kubectl get roles,rolebindings,clusterroles,clusterrolebindings --all-namespaces
+
+
+Create a role using manifest (scoped to a namespace)
+Let's say you want to create a Role that allows a user to list and get pods in a specific namespace:
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: my-namespace
+  name: pod-reader
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list"]
+
+
+Then, you can create a RoleBinding to bind this Role to a user or group:
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-pods
+  namespace: my-namespace
+subjects:
+- kind: User
+  name: my-user
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: pod-reader
+  apiGroup: rbac.authorization.k8s.io
+
+
+
