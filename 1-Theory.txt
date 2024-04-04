@@ -258,17 +258,6 @@ Exit Code 1	Application error	Container was stopped due to application error or 
 Exit code 137 means a container or pod is trying to use more memory than it’s allowed. 
 
 
-BLUE-GREEN DEPLOYMENT
----------------------
-
-There are most of the organization has been followed/ing the Blue-Green Deployment and have proved it as safe method for continuous deployment.
--> strategy in which you create two separate, but identical environments.
-  - One environment (blue) is running the current application version
-  - One environment (green) is running the new or to-be application version.
-
-Only one enviroment is live at a time 
-In that way we can perform app upgrade on one when it is done route traffc to it till that time it will act as staging area
-
   
 ALERT MANAGER
 -------------
