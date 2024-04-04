@@ -24,6 +24,45 @@ What have you worked on till now?
       - GSTN
     
 
+How many types of deploymenrs are threre in kubernetes
+
+
+
+BLUE-GREEN DEPLOYMENT
+---------------------
+There are most of the organization has been followed/ing the Blue-Green Deployment and have proved it as safe method for continuous deployment.
+-> strategy in which you create two separate, but identical environments.
+  - One environment (blue) is running the current application version
+  - One environment (green) is running the new or to-be application version.
+Only one enviroment is live at a time 
+In that way we can perform app upgrade on one when it is done route traffc to it till that time it will act as staging area
+Benifits - rollbacks and zero downtime
+
+Canary deployment
+-----------------
+A small portion of traffic (canary) is directed to a newer version of application. this way we can monitor the performance of new verison of application
+As the new verison seems to be stable the traffic being routed to it is gradually increased
+if there is any issue detected the traffic can be redirected immediately to the previous verison
+
+Rolling Deployment
+------------------
+Gradually rolling out new pods with new version in an incremental manner
+DC replaces older pods with newer veriosns
+
+A/B Testing
+-----------
+difrenet versions of applications are deployed and the users are redirected randomly (using traffic routing mechanisms) to these versions and then performance is compared.
+
+Shadow Deployment
+-----------------
+New version runs in parallel to existing version user doesnt know.
+
+Feature Flag
+-------------
+features are conditionally enabled/disabled based on configuration settings. gradual feature rollout and experimentation
+
+
+
 
 What do you know about kubernetes?
   How does self healing work
