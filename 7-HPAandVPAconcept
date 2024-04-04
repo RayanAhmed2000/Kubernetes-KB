@@ -1,0 +1,70 @@
+How is Horizontal scaling achieved in kubernetes?
+Horizontal scaling means increasing the no of resources rather than the size of resources 
+We can create HPA in kubernetets which will automatically scale RS RC DC stateful sets (not daemon sets)
+
+we can create by writing manifests -
+
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: my-app-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: my-app-deployment
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      targetAverageUtilization: 50
+
+or by using the following commands - 
+
+kubectl autoscale deployment <deployment-name> --cpu-percent=<cpu-percent> --min=<min-replicas> --max=<max-replicas> 
+
+kubectl autoscale rs my-rs --cpu-percent=50 --min=2 --max=10
+
+kubectl autoscale rs my-replicaset --cpu-percent=50 --min=2 --max=10
+
+kubectl autoscale statefulset <statefulset-name> --cpu-percent=<cpu-percent> --min=<min-replicas> --max=<max-replicas>
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+How is vertical scaling achieved in Kuberenetes?
+Like we provide resource limits inside manisfest
+So if there is change in the load we have to manually go and edit them in manifest
+If I want that resource limits to automatically adjust I can use VPA
+Automatically adjust resource allocation 
+
+We can create VPA using manifest
+
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: example-vpa
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind: "Deployment"
+    name: "example-deployment"
+  updatePolicy:
+    updateMode: "Auto"
+  resourcePolicy:
+    containerPolicies:
+    - containerName: "*"
+      minAllowed:
+        cpu: 100m  # Minimum CPU limit (100 milliCPU)
+      maxAllowed:
+        cpu: 1    # Maximum CPU limit (1 CPU)
+
+
+CPU limits can be defined 
+once the load is high the VPA automatically launched new pods with increased CPUlimits
+
+
+
+
