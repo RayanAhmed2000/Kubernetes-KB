@@ -28,22 +28,23 @@ pv is a persisstemnt volume it contains storage srver information
 without pv we cannot create pvc
 5 gb ka pv banaya
 3 gb ka pvc aya to use pv se bound kardia
+Kubectl get pvc karoge to 5 GB ka hi size dikhaega PVC ka and use bi kar paenge 5GB this is because PVC and PV ka size and accessmode should be same
 
 Volume provisioning types
 1 static -> we need to manually create pv 
-2 dynamic -> all the information of storage server we provide to API, API creates pv automatically
+2 dynamic -> all the information of storage server we provide to API, API creates pv automatically according to requirement
 
 acccess modes in pv->
 
-1 ReadWriteOnce -> 1 time pe 1 POD Read write karne ke liye access karega 
-2 ReadWriteMany -> 1 time pe  multiple PODS Read write karne ke liye access karenge
+1 ReadWriteOnce -> 1 time pe 1 Node ke saare PODS Read write karne ke liye access kar skte hain us volume ko
+2 ReadWriteMany -> 1 time pe saare NODES ke saare PODS Read write karne ke liye access karenge (NOT Recommednded Corrupt hone ke chances)
 3 ReadOnlyMany -> Multiple PODS ek saath Sirf read karenge
-4 ReadWriteOncePOD - > Ek time pe ek hi POD write karega
+4 ReadWriteOncePOD - > Ek time pe ek hi POD read write karega kyunki 1 ReadWriteOnce me bi corruption chances they jab 100+ pods chalte hain ek node pe
 
 PVReclaimPolicy - If PVC is deleted then uske data ka kya karna hai? Jo PV me pada hua hai
-1 Recycle - depreciated
+1 Recycle - pvc delete kardia to pv will delete the data which pvc has written and get attached to another pvc.
 2 Retain - Us ko save rakho admin manually hataega usko 
-3 Deleted - PVC delete ho jaye to uske dwara likha gya hua data bi delete ho jaye
+3 Deleted - PVC delete ho gya to PV bhi delete ho jaega
 
 pv status 
 
@@ -55,3 +56,12 @@ NOTE
 1 pv only 1 pvc se attached ho skta hai
 pv -> clustrer level
 pvc -> namespace level 
+
+
+
+Q - Same name ki 2 PV bana skte hain?
+NO Cluster level scope hota hai PV ka
+
+Q - PVC same name ki bnaa sket hain?
+Han alag alag namespace me
+Namespace level scope hota hai iska 
