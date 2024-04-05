@@ -38,20 +38,32 @@ Kubectl - command utility
 
 BRIDGE VS CALICO
 ----------------
-Containers in diffrent bridge network cannot communicate with each other
-Containers in diffrent networks can ping each other
+Containers in diffrent bridge network cannot communicate with each other -> L2 switch
+Containers in diffrent networks can ping each other -> L3 Switch
 
 CONTROL PLANE VS SYSTEM MODE INSTALLATION
 -----------------------------------------
-Control plane all services have their respective pods so that if one servoce fails others are not impacted /  allows for better scalability, fault isolation, and management of the control plane components.
+Control plane all services (kubeapi, etcd, kubecontroller, kubescheduler) have their respective PODS so that if one servoce fails others are not impacted /  allows for better scalability, fault isolation, and management of the control plane components. 99% companies use this.
+kubeapi down hoga to authentication and authorization ni ho paega lekin application down ni nhi 
+
+isme hum check karenge kube-system ke PODS to hume sabke pods dikh jaenge
+kubectl get pods -n kube-system
 
 System mode installation  refers to a deployment model where the control plane components are installed directly on the worker nodes themselves.
 combining the roles of running application workloads and managing the cluster's state.
 Simple for small worloads / not fault tolerant.
+ek bi service down gyi saari imapct hongi
+
+isme hum check kaise karenge 
+sytemctl status kube-api
+
 
 Namespaces are a way to organize clusters into virtual sub-clusters
 It is just like a project we can use to orgaize 
 By default namspace - kube-system
+
+What is Kubeadm?
+it is just an intsallation utility
 
 
 LABELS AND SELECTORS
