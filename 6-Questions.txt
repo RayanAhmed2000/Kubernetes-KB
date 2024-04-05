@@ -127,6 +127,8 @@ ANswer like a SRE
   PODS
   Network Ingress
   Logs
+  IP 
+
 
 Drawbacks of docker over Kubernetes?
  - No centralized management
