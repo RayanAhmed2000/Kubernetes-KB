@@ -1,0 +1,245 @@
+Docker drawbacks vs Kubernetes
+Why was there need of kubernetes? 
+
+Fault torelation and HA not there -> If one POD crashed then manually go and terminate it and bring another POD up
+No centralised management
+
+Kubernetes - 
+Centralized management -> Masternode manages all worker nodes centrally nodes me jane ki need nahi hai
+har chiz manage kar skte hain master node se pods namespaces ingress etc etc
+Scalability -> RC/DC/RS 
+
+ETCD me cluster ka saara data hota hai
+Application ka data nhi hota hai
+
+Kubelet - it is an agent of master node that takes handover and instructions from the master node then apply to worker nodes
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Kubernetes installation
+-----------------------
+
+change hostnames of machines
+sudo hostname <hostname>
+nano /etc/hostname -> change permanently
+
+
+cat /etc/hosts
+
+PrivateIPofmasternode    masternodename
+PrivateIPofworkernode1   workernode1name
+PrivateIPofworkernode2   workernode2name
+''     ''          ''     ''          "
+
+
+SELINUX DISABLE
+
+
+install kubeadm on master node
+
+cd /etc/yum.repos.d
+vi kubernetes.repo
+
+paste from kubernertes.io website
+
+yum install kubeadm -y
+isme kubectl and kubelet dono insatll ho jaega
+
+Now install docker on machine
+yum install docker -y
+
+
+
+syetrmctl start kubelet
+syetrmctl enable kubelet
+syetrmctl start docker
+syetrmctl enable docker
+
+
+
+rm -f /etc/containerd/config.toml
+
+systemctl restart containerd
+
+
+NOW CONTROL PLANE INSTALLATION IS COMPLETED SUCEESSFULLY
+
+kubectl get nodes
+<it will give error>
+
+
+kubvectl get nodes --kubeconfig=/etc/kubernetes/admin.config
+<ab aa jaega becuase config file ke throgh authentication ho jaega>
+
+
+To ab is file ko is user ke home me jake daal denge to permission mil jaegi
+
+
+Kaise dalen
+root directory me ao phle
+
+cd /
+cp /etc/kubernetes/admin.config .kube/config
+
+
+Now if we run 
+kubectl get nodes
+
+<output mil jaega>
+
+
+now if we do 
+kubectl get nodes
+
+Node           Status
+kubemaster    NotReady
+
+master up hai but worker nodes to hai hi nhai
+
+kubectl get pods
+<nothing>
+
+means abi worker node configured nahi hai
+
+worker node pe docker install karna padega jaise master pe kia tha
+
+
+
+MASTER NODE KI PEHCHAN KAISE HOTI HAI / KOI MACHINE KAISE MASTER NODE BAN SKTI HAI
+
+#1
+kubeadm get token list
+<ek token aega>
+<delete ho gya to create bi kar skte hain>
+
+kubeadm create token
+
+
+#2
+vi /etc/kubernetes/pki/ca.crt
+vi /etc/kubernetes/pki/ca.key
+<ye hona chahiye>
+
+
+WORKER NODE CONNECT KAISE KAREN MASTER NODE SE
+
+#1
+PrivateIP hostname daal dia cat /etc/hosts file me
+
+
+#2
+kubeadm token create --print-join-command
+kubeadm ................................
+<yaha pe ek bada sa commad dega jo hume worker node pe chalana padega tabi connect hoega>
+
+
+now got to worker node and run the above generated command
+kubeadm ...........................................
+<it will show message kubeadm not present on worker node >
+
+#QUESTION kya worker node pe kubeadm install karena padta hai?
+yes... bootstrapping ke loiye
+ek baar add ho jae phir kubeadm hata do koi dikkat nahi 
+
+
+
+
+THis node has joined the cluster
+
+
+
+Now if we do kubectl get nodes
+NAME             STATUS
+kubemaster      not ready
+kubenide-1      not ready
+kubenide-2      not ready
+
+
+ab visible hain worker nodes cluster me
+BUT why is it showing not ready 
+BECAUSE networkiung is not setup
+
+we will download calico.yaml file
+curl https://docs.................
+
+then 
+
+
+kubectl create -f calico.yaml
+
+
+Ab sara kam ye yml kardegi 
+
+now if you hit
+
+kubectl get nodes
+NAME             STATUS
+kubemaster       ready
+kubenide-1       ready
+kubenide-2       ready
+
+
+DEFAULT NAME SPACE which is already created is 
+Kube-system
+
+
+
+Also Calico ke 3 pods running honge 1 master pe aur baki 1 1 worker pe
+kubectl get pod -n kube-system
+
+calico 
+calico 
+calico
+
+konse nodes pe hain check krne ke liye
+
+kubectl get pod -o wide -n kube-sytem
+
+
+pata chal jaega ki har node pe 1 calico ka pod hai
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
