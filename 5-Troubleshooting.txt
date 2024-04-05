@@ -33,7 +33,7 @@ Liveness probes– Liveness probes could have misconfigured or probe fails due t
 ImagePullBackOff
 ---------------
 Image is not defined properly - check events usme aa jaega FailedtoPullImage / could be either from a typo or Image may private -> failure - Private Image Registry and Wrong Credentials
-Network Issue - POD Not able to pull image due to network issue
+Network Issue - POD Not able to pull image due to network issue port blocked on security group
 Conatiner Registry Rate Limits - some registries have implimented rate limits
 
 PVC Trouble shooting
