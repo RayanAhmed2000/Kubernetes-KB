@@ -26,6 +26,8 @@ kubectl get pods -o wide --show-lables      # show pods with labels
 
 kubeclt get pods -l app=nginx              # show pods with speccific labels
 
+Kubectl describe node <nodename> | grep -i pod     # node pe kitne pods hain
+
 Kubectl get events                          # show all logs of namespce Namespace level pe chalti hai ye command
 
 kubectl get events | grep -i podname        # sirf specific pod ke logs dikhao
