@@ -203,6 +203,7 @@ pata chal jaega ki har node pe 1 calico ka pod hai
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Kubernetes networking
 
 
 
@@ -220,11 +221,132 @@ pata chal jaega ki har node pe 1 calico ka pod hai
 
 
 
+KUBERNETES NETWORKING
+
+Q - What is service discovery / kube proxy / service IP
+It is a 
+kubeproxy ka 1 pod haar node pe chal raha hoga
 
 
 
 
+ek dc banaya
 
+kubectl create deploy test --image=nginx
+
+kubectl expose deploy test --name=myservice --port=80 
+
+curl http://IP
+<output milega>
+
+
+kubectl expose deploy test --name=myservice --port=80 --target-port=8080
+curl http://IP
+<nhi milega because by default http sends request on port 80>
+
+curl http://IP:8080 
+<Ab milega>
+
+
+port -> Node ka port
+target-port -> POD ka port
+
+
+
+Service IP 2 types ki hoti hain
+1 - ClusterIP
+2 - Node PORT
+
+1- Cluster IP
+reachable from within the cluster only 
+
+
+2- Node Port - for accessing appilication from outside the cluster
+
+kubectl create deploy test --image=nginx
+
+kubectl expose deploy test --name=nodeportservice --port=80 --target-port=8080 --type=nodeport -o yaml --dry-run=client 
+
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: test
+  name: nodeportservice
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: test
+  type: nodeport
+status:
+  loadBalancer: {}   #iska matlab load balancer create karna padega AWS pe
+
+WHEN YOU DESCRIBE THE SERVICE NODEPORT
+Name:                     nodeportservice
+Namespace:                default
+Labels:                   <none>
+Annotations:              <none>
+Selector:                 app=test
+Type:                     NodePort
+IP:                       10.96.123.456
+Port:                     <unset>  80/TCP
+TargetPort:               8080/TCP
+NodePort:                 <unset>  31567/TCP
+Endpoints:                192.168.1.100:8080,192.168.1.101:8080
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+
+
+When will you use Cluster IP and Nodeport
+when exposing database deplyment -> Cluster IP
+When exposing our application pods -> Node Port
+
+Ab jab load balancer ka DNS hit karoge to traffic kaise jaega 
+
+Domain Name > DNS of load balancer > Load balancer > Target Group > NodePort ka port > IP of NodePort > POD IP > PODS
+
+NodePort ka port ki range -> 30000-32768
+
+
+
+Ab issue kya tha ki Nodeport ka port ek hi tha "31567" to suppose meri multiple deployments hain 1 for / one for /payments one for /help
+then alag alag ports honge sabke and MULTIPLE LOAD BALANCERS banane padenge 
+
+Now what if we could manage all of this from within cluster -> INGRESS
+
+So 1 lb will send request to Ingress then ingress based on routing rules will forward the request to suitable services then service to deployments
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: example-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /test
+        pathType: Prefix
+        backend:
+          service:
+            name: test-service
+            port:
+              number: 80
+
+
+/test pe jo bi request jaegi wo 
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+EKS
 
 
 
