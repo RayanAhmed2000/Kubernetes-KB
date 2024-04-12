@@ -26,6 +26,10 @@ What have you worked on till now?
 
 How many types of deploymenrs are threre in kubernetes
 
+What are the P1's that you have faced in your job?
+- Unhealthy host count was increased because we were using a combo of spot and on demand and the spot intances were taken back by AWS because of price change because of this website was impacted
+- GSTN PT : Client opened a bride because not able to connect to a controller nmachine -> P1 -> Server 1/2 check -> Reboot
+- DB connections high -> Replica Read set up and in one of our accounts we have an elasticache configured to reduce the load on the database although tbh I didnt set it up but I got a sneak peak in
 
 
 BLUE-GREEN DEPLOYMENT
