@@ -1,3 +1,32 @@
+Introduce Yourself?
+Myself Rayan Ahmed
+I am resident of lucknow India 
+I have completed my schooling from Cathedral School
+After which I went on to pursue my bachelors in Computer Science from Intergral University
+And Currently I am working as a Cloud Engineer at To The New 
+I am working in India BU
+We are handling Indian Clients
+As a part of our job role we monitor clients infra 24/7 * 365 
+and a part from that we also perform other operational tasks like
+patching 
+instance rotation 
+we also send monthly reports related to security and vulnerabilites and various other Audits to clients
+We also provide any Ad hoc data that the client may request for example
+We also manage the clients enviroments like UAT DEV etc we bring those env UP/DOWN depending upon the request
+We also do deployments on AWS for example launching ec2 instance etc
+Basically we are responsible for the availability of clients ifra we make sure its running 
+And because in Biofourmis the worload is on Kubernetes so I ll just include about kuberntes projects that I am dealing with in my current JOb 
+so
+We have kuberntes workload on EKS as well as we have kuberneets cliusters set up manually on instances in 2 project, its on control plane insallation
+So in these project we are responsible for monitoring and troubleshooting the kubernertes clusters
+For example if POD goes in Pending state Crashloopback etc
+or PVC is full then we edit the YAML and increase the storage capacity of course after the permission of client
+Or if URL goes down then we do the trouble shoot and RCA so yes
+thats pretty much about myself and my job role that Im currenlty in
+
+
+
+
 Which Linux flavour you have worked on?
 
 Command to list out processes?
@@ -209,3 +238,42 @@ POD
 VPC, subnets, IGW, NAT Gateway, Route tables, ASG
 How traffic flows from EC2 to end user, and vice versa.
 How would you insert data in a Database using SQS & SNS.
+
+
+
+RDS Questions?
+
+Have you worked on RDS, what tasks you have performed?
+Yes I have worked on RDS and infact RDS is in use in almost every project that I am delaing with right now
+So regarding the access of RDS it is a bit crirical so we have the access in few projects only where in One of my projects that I am dealing with we 
+sometimes get a replica lag error in that case we login into RDS and check for the queries that are taking long times to execute
+Apart from that I also migtrated one database that was hosted on EC2 to RDS 
+
+mysqldump -u [username] -p [database_name] > [dump_file_name].sql
+
+then RUN
+
+mysql -h [RDS_endpoint] -u [username] -p [database_name] < [dump_file.sql]
+
+
+
+If the database is slow, what would you do?
+We analuze the root cause of the slowness and then after discussion with client we decide whether we need a new replica or whether we need to increase the size of DB or whether if there are regular long running queris then we can use caching mechanism
+
+What can you do mitigate an outage of database?
+Ensure HA by using Mukti AZ deployments
+- creates a clone of DB in Another AZ within Same Region
+- Always in Synch with our main DB
+- Cannot be used for extra storage
+- Cannot be accessed unless a failure occurs
+- Backups taken form Standby reduces load on Main DB
+- 
+
+Enabling auto backup od RDS
+DR strategies
+
+
+What can you do make a database work a little faster, temporarily (Increase provisioned IOPS to temporarily improve performance)
+IOPS | Caching | Replicas | Query Optimization | Monitoring
+
+
