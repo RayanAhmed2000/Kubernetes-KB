@@ -272,6 +272,18 @@ Ensure HA by using Mukti AZ deployments
 Enabling auto backup od RDS
 DR strategies
 
+Active/Passive
+- stariting from Backup and Restore it is the coldest one and with the max downtime but yes its the most cheapest as well
+- Pilot light 10's of minute of downtime
+- warm standby minutes of downtime
+
+Active/Active
+- Multi site active/active - it has an active dr running and it has zero downtime but its the most expensive
+
+
+
+
+
 
 What can you do make a database work a little faster, temporarily (Increase provisioned IOPS to temporarily improve performance)
 IOPS | Caching | Replicas | Query Optimization | Monitoring
