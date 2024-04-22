@@ -1,0 +1,9 @@
+lsblk - (without sudo)
+listing blocks 
+listings partitions
+
+lsblk -f
+
+
+fdisk -l (sudo required)
+- used to list out disk partitions
